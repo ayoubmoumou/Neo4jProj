@@ -1,11 +1,12 @@
 package com.emi.neo4jproject.model;
 
 
+import com.emi.neo4jproject.Relationships.Utilise;
 import lombok.*;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.Set;
 
@@ -14,13 +15,13 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-@NodeEntity
+@Node
 public class Transport {
     @Id
     @GeneratedValue
     Long id;
 
-    private TransportTypes typeTransport;
+    private String typeTransport;
     private Integer numero;
     private String matricule;
     //    private String ville;
@@ -33,6 +34,23 @@ public class Transport {
     @Relationship(type = "TRAVERSE")
     private Set<Station> stations;
 
-    @Relationship(type="UTILISE", direction = Relationship.INCOMING)
+    @Relationship(type="UTILISE", direction = Relationship.Direction.INCOMING)
     private Set<Utilise> utilisateurs;
+
+    public Transport(Long id, String typeTransport, Integer numero, String matricule, Integer vitesse, Integer capacite, String pdC, Integer prix, String marque) {
+        this.id = id;
+        this.typeTransport = typeTransport;
+        this.numero = numero;
+        this.matricule = matricule;
+        this.vitesse = vitesse;
+        this.capacite = capacite;
+        this.PdC = pdC;
+        this.prix = prix;
+        this.marque = marque;
+    }
+
+    public Transport(Long id, String typeTransport) {
+        this.id = id;
+        this.typeTransport = typeTransport;
+    }
 }

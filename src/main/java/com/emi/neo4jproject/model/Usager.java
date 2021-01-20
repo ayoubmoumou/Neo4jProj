@@ -1,10 +1,11 @@
 package com.emi.neo4jproject.model;
 
 import lombok.*;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+//import org.neo4j.ogm.annotation.NodeEntity;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-@NodeEntity
+@Node
 public class Usager {
 
     @Id @GeneratedValue
@@ -24,12 +25,16 @@ public class Usager {
     private String nom;
     private LocalDate anneeNaissance;
     private boolean handicap;
-    private Fonction fonction;
-    private TransportTypes pT;
+    private String fonction;
+    private String pT;
 
 
     @Relationship(type = "UTILISE")
-    private Set<Transport> transports;
+    private List<Transport> transports;
 
 
+    public Usager(String nom, boolean handicap) {
+        this.nom = nom;
+        this.handicap = handicap;
+    }
 }
