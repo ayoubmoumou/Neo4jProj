@@ -1,5 +1,6 @@
 package com.emi.neo4jproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 //import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
@@ -27,7 +28,6 @@ public class Usager {
     private boolean handicap;
     private String fonction;
     private String pT;
-
 
     @Relationship(type = "UTILISE")
     private List<Transport> transports;

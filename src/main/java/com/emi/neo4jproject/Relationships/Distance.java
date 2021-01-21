@@ -14,7 +14,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 @NoArgsConstructor
 @Builder
 @ToString
-@RelationshipEntity(type = "DISTANCE_REL")
+@RelationshipEntity(type = "DISTANCE_RE")
 public class Distance {
 
     @Id

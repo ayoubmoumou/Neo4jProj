@@ -4,15 +4,18 @@ import com.emi.neo4jproject.Relationships.Distance;
 import com.emi.neo4jproject.Relationships.Traverse;
 import lombok.*;
 
+import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-@Node
+@NodeEntity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,8 +32,8 @@ public class Station {
     @Relationship(type = "TRAVERSE" , direction = Relationship.Direction.INCOMING)
     private List<Traverse> transport;
 
-    @Relationship(type="DISTANCE", direction = Relationship.Direction.INCOMING)
-    private Set<Distance> vers;
+    @Relationship(type="DISTANCE_RE")
+    private Set<Distance> vers = Collections.emptySet();
 
     @Relationship(type = "SITUE")
     private Ville ville;

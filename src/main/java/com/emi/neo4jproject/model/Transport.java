@@ -2,7 +2,9 @@ package com.emi.neo4jproject.model;
 
 
 import com.emi.neo4jproject.Relationships.Utilise;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -15,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-@Node
+@NodeEntity
 public class Transport {
     @Id
     @GeneratedValue
@@ -34,6 +36,7 @@ public class Transport {
     @Relationship(type = "TRAVERSE")
     private Set<Station> stations;
 
+
     @Relationship(type="UTILISE", direction = Relationship.Direction.INCOMING)
     private Set<Utilise> utilisateurs;
 
@@ -49,8 +52,8 @@ public class Transport {
         this.marque = marque;
     }
 
-    public Transport(Long id, String typeTransport) {
-        this.id = id;
+    public Transport(String typeTransport) {
+
         this.typeTransport = typeTransport;
     }
 }
